@@ -1,0 +1,13 @@
+gesture_recognition_node:
+  ros__parameters:
+    config_path: ""
+    lazy_load: true
+    score_threshold: 0.25
+    image_topic: "/camera/image_raw"   # 直连摄像头时发布到此话题；订阅模式时从此话题收图
+    gestures_topic: "/perception/gestures"
+    boxes_topic: "/gesture_recognition/boxes"
+    debug_image_topic: "/gesture_recognition/debug_image"
+    labels: ["fist", "palm", "index", "ok", "peace", "thumbs_up", "thumbs_down", "rock", "paper", "scissors", "call", "like", "dislike", "stop", "one", "two", "three"]
+    use_camera: true    # true=直连摄像头并发布 /camera/image_raw；false=订阅 image_topic
+    camera_id: 1
+    camera_fps: 30.0
