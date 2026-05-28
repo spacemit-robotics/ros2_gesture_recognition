@@ -1,0 +1,34 @@
+module: middleware/ros2/perception/gesture_recognition
+
+tests:
+  - name: gesture-recognition-functional
+    description: Verify gesture_recognition config errors, lazy_load startup, and boxes topic (requires SDK staging build).
+    category: functional
+    scopes: [pr]
+    timeout_s: 300
+    workdir: sdk
+    command: |
+      cd middleware/ros2/perception
+      bash gesture_recognition/tests/test_functional.sh
+
+  - name: gesture-recognition-invalid-input
+    description: Reject invalid yaml, missing config, missing model, and out-of-range score_threshold.
+    category: functional
+    scopes: [pr]
+    timeout_s: 180
+    workdir: sdk
+    command: |
+      cd middleware/ros2/perception
+      bash gesture_recognition/tests/test_invalid_input.sh
+
+  - name: gesture-recognition-performance
+    description: Measure init time and first inference output latency with real model (thresholds 5s / 8s).
+    category: performance
+    scopes: [scheduled]
+    timeout_s: 300
+    artifacts:
+      - perception_perf_gesture_recognition.txt
+    workdir: sdk
+    command: |
+      cd middleware/ros2/perception
+      bash gesture_recognition/tests/test_performance.sh
