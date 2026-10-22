@@ -33,11 +33,14 @@
 #include "vision_service.h"
 
 namespace {
-// Default gesture labels (overridable via ROS parameter 'labels').
+// Default gesture labels must match model_zoo assets/labels/gesture.txt.
+// Overridable via ROS parameter 'labels'.
 const std::vector<std::string> kDefaultGestureLabels = {
-    "fist", "palm", "index", "ok", "peace", "thumbs_up", "thumbs_down",
-    "rock", "paper", "scissors", "call", "like", "dislike", "stop", "one", "two", "three"
+    "ok", "stop", "palm", "like", "dislike", "no_gesture", "call", "fist", "four",
+    "mute", "one", "peace", "peace_inverted", "rock", "stop_inverted", "three",
+    "three2", "two_up", "two_up_inverted",
 };
+
 }  // namespace
 
 class GestureRecognitionNode : public rclcpp::Node {
@@ -75,6 +78,7 @@ class GestureRecognitionNode : public rclcpp::Node {
         if (!service_) {
             throw std::runtime_error("VisionService::Create failed: " + VisionService::LastCreateError());
         }
+        RCLCPP_INFO(get_logger(), "gesture labels configured: %zu classes", labels_.size());
 
         boxes_pub_ = create_publisher<std_msgs::msg::Float32MultiArray>(boxes_topic_, 10);
 #ifdef HAVE_VISION_MSGS
