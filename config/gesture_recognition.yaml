@@ -7,7 +7,8 @@ gesture_recognition_node:
     gestures_topic: "/perception/gestures"
     boxes_topic: "/gesture_recognition/boxes"
     debug_image_topic: "/gesture_recognition/debug_image"
-    labels: ["fist", "palm", "index", "ok", "peace", "thumbs_up", "thumbs_down", "rock", "paper", "scissors", "call", "like", "dislike", "stop", "one", "two", "three"]
+    # Must match model_zoo assets/labels/gesture.txt class order.
+    labels: ["ok", "stop", "palm", "like", "dislike", "no_gesture", "call", "fist", "four", "mute", "one", "peace", "peace_inverted", "rock", "stop_inverted", "three", "three2", "two_up", "two_up_inverted"]
     use_camera: true    # true=直连摄像头并发布 /camera/image_raw；false=订阅 image_topic
     camera_id: 1
     camera_fps: 30.0
